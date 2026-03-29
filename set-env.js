@@ -5,8 +5,10 @@ const path = require('path');
 const firebaseApiKey = process.env.FIREBASE_API_KEY;
 
 if (!firebaseApiKey) {
-  console.log('FIREBASE_API_KEY not found in environment variables. Skipping environment generation.');
-  process.exit(0);
+  console.warn('⚠️ WARNING: FIREBASE_API_KEY not found in environment variables!');
+  console.warn('The build will proceed with placeholder values. Make sure to set environment variables in Vercel.');
+} else {
+  console.log('✅ FIREBASE_API_KEY found. Generating environment files...');
 }
 
 const firebaseAuthDomain = process.env.FIREBASE_AUTH_DOMAIN || '';
