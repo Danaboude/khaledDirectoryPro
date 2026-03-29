@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary": "#ffffff",
+              "primary-container": "#007cae",
+              "outline-variant": "#bec8d0",
+              "on-primary-fixed": "#001e2e",
+              "tertiary-fixed": "#a3f69c",
+              "inverse-on-surface": "#eef1f7",
+              "on-secondary-fixed-variant": "#564500",
+              "primary": "#00628b",
+              "surface": "#f7f9ff",
+              "error": "#ba1a1a",
+              "error-container": "#ffdad6",
+              "on-tertiary-fixed-variant": "#005312",
+              "surface-container-high": "#e5e8ee",
+              "on-primary-fixed-variant": "#004c6c",
+              "surface-container-highest": "#dfe3e8",
+              "surface-container": "#ebeef4",
+              "outline": "#6f7880",
+              "inverse-primary": "#84cfff",
+              "on-tertiary-fixed": "#002204",
+              "surface-bright": "#f7f9ff",
+              "secondary-container": "#fed000",
+              "on-background": "#181c20",
+              "tertiary-container": "#358438",
+              "surface-container-lowest": "#ffffff",
+              "surface-dim": "#d7dae0",
+              "on-secondary-fixed": "#231b00",
+              "on-tertiary-container": "#f7fff1",
+              "inverse-surface": "#2d3135",
+              "surface-variant": "#dfe3e8",
+              "primary-fixed": "#c7e7ff",
+              "tertiary": "#186a22",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#84cfff",
+              "on-error-container": "#93000a",
+              "on-secondary-container": "#6f5900",
+              "surface-container-low": "#f1f4fa",
+              "secondary-fixed": "#ffe07f",
+              "secondary-fixed-dim": "#edc200",
+              "on-surface-variant": "#3f484f",
+              "on-secondary": "#ffffff",
+              "secondary": "#725c00",
+              "on-surface": "#181c20",
+              "background": "#f7f9ff",
+              "on-primary-container": "#fcfcff",
+              "surface-tint": "#00658e",
+              "tertiary-fixed-dim": "#88d982",
+              "on-tertiary": "#ffffff",
+              "emerald-vibrant": "#10b981"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans", "system-ui"],
+              "body": ["Inter", "system-ui"],
+              "label": ["Inter", "system-ui"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+            boxShadow: {
+              'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+              'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-on-surface antialiased">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 h-20">
+<div class="flex justify-between items-center px-8 h-full w-full max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-extrabold text-primary tracking-tight">DirectoryPro</span>
+<nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+<a class="text-primary font-bold relative after:content-[''] after:absolute after:bottom-[-4px] after:right-0 after:w-full after:h-[2px] after:bg-primary" href="#">Browse</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Categories</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Pricing</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">About</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-sm font-semibold text-slate-700 px-4 py-2 hover:bg-slate-50 rounded-lg transition-all">Sign In</button>
+<button class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all">List a Business</button>
+</div>
+</div>
+</header>
+<main class="pt-28 pb-16 px-4 md:px-8 max-w-screen-2xl mx-auto">
+<!-- Search & Filter Header -->
+<div class="mb-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-extrabold tracking-tight text-slate-900 mb-1">نتائج البحث</h1>
+<p class="text-slate-500 font-medium">تم العثور على 128 شركة تطابق بحثك</p>
+</div>
+<!-- Sort Options -->
+<div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl w-fit">
+<button class="px-6 py-2 rounded-lg text-sm font-bold bg-white text-primary shadow-sm">الأفضل</button>
+<button class="px-6 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">الأقرب</button>
+<button class="px-6 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">الأعلى تقييماً</button>
+</div>
+</div>
+<!-- Search Command Center -->
+<div class="w-full bg-white p-3 rounded-2xl shadow-soft border border-slate-100 flex flex-col md:flex-row items-center gap-3">
+<div class="flex-[2] w-full flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-transparent focus-within:border-primary/20 focus-within:bg-white transition-all">
+<span class="material-symbols-outlined text-slate-400 ml-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium placeholder:text-slate-400" placeholder="ما الذي تبحث عنه؟ (مثلاً: مطاعم، سباكة، برمجة)" type="text"/>
+</div>
+<div class="flex-1 w-full flex items-center bg-slate-50 rounded-xl px-4 py-3 border border-transparent focus-within:border-primary/20 focus-within:bg-white transition-all">
+<span class="material-symbols-outlined text-slate-400 ml-3">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium placeholder:text-slate-400" placeholder="الموقع أو المدينة" type="text"/>
+</div>
+<button class="w-full md:w-auto bg-primary text-white px-10 py-3.5 rounded-xl font-bold text-sm hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">تحديث البحث</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+<!-- Sidebar Filters -->
+<aside class="lg:col-span-3 space-y-8 hidden lg:block">
+<div class="bg-white p-8 rounded-2xl shadow-soft border border-slate-100 space-y-8">
+<div>
+<h3 class="font-bold mb-5 text-slate-900 flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        التصنيفات
+                    </h3>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">التقنية والبرمجيات</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<span class="text-sm font-bold text-primary">الخدمات الاستشارية</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-slate-300 text-primary focus:ring-primary/20 cursor-pointer" type="checkbox"/>
+<span class="text-sm font-medium text-slate-600 group-hover:text-primary transition-colors">التصميم والابتكار</span>
+</label>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100">
+<h3 class="font-bold mb-5 text-slate-900 flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        نطاق السعر
+                    </h3>
+<div class="flex gap-2 p-1 bg-slate-50 rounded-xl">
+<button class="flex-1 py-2 rounded-lg text-xs font-bold hover:bg-white hover:shadow-sm transition-all text-slate-600">$</button>
+<button class="flex-1 py-2 bg-primary text-white rounded-lg text-xs font-bold shadow-md shadow-primary/10">$$</button>
+<button class="flex-1 py-2 rounded-lg text-xs font-bold hover:bg-white hover:shadow-sm transition-all text-slate-600">$$$</button>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-100 flex justify-between items-center">
+<button class="text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors">مسح الكل</button>
+<button class="text-sm font-bold text-primary hover:underline">تطبيق</button>
+</div>
+</div>
+<!-- Sleek Integrated Map -->
+<div class="rounded-2xl overflow-hidden shadow-soft border border-slate-100 relative group cursor-pointer aspect-square">
+<img alt="Map view" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCua4O_9dS4yq2D6h1iyNm6-JmXhTMO8WED-hynjpqCN3n_eeK4Ux-2i4eR1nTX6dls-0jQjiJfhy8QUDBKZxWqFVe8z7FDmiZD4yhE0oGz25nK7nuS6LUbuK7VoAxunfMe6F2yAn0GNWbcqIzn2zaAsTP0zF8L7xNvWGLGDazSHV_OGWIx8YD3BKFkh-ucfcTdAvk_Ec62ZqjEMQAw91IJPiNR21hf-yG1x6D7hYCl025z-uxnwKrw2Q3XUL30riT2uxnzroZKZw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[85%]">
+<button class="w-full glass-card text-slate-900 text-xs font-bold py-3 px-4 rounded-xl shadow-glass flex items-center justify-center gap-2 group-hover:bg-white transition-all">
+<span class="material-symbols-outlined text-lg">map</span>
+                        عرض الخريطة التفاعلية
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Results Grid -->
+<section class="lg:col-span-9">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<article class="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-glass border border-slate-100 transition-all duration-500 group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Office" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTbWDwSe2nAjSsvQjd1N2nOQ5sr_3XURz1_pRZ9mQrQRpwmZOewrJnGi1j6My7ss8s0uA66zrJCNkCyFWRbL87Dq2KAELxiMmrSXeT2jU-3IRC8t8824L8SCRVxlar1cXtKefbNJr-AC_XoxkZLmVZXLPvi0VulTR-l7n0MVlMepCpTPWDuwlYYtdF8jloUF3RAySllQub9zIiryhUZfNPYHe6SgWHz7Ni5ry7ue8B1orxBDvVMwEUDLqzEUep26TC2I7h0DDfsQ"/>
+<div class="absolute top-4 right-4 flex gap-2">
+<span class="bg-emerald-vibrant/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1">verified</span>
+                                موثق
+                            </span>
+<span class="bg-slate-900/70 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-lg">مميز</span>
+</div>
+<div class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+<div class="flex items-center gap-1.5">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+</div>
+<span class="text-white text-xs font-bold">4.8 (124)</span>
+</div>
+</div>
+</div>
+<div class="p-7">
+<div class="flex justify-between items-start mb-5">
+<div>
+<h2 class="text-xl font-extrabold text-slate-900 mb-2 group-hover:text-primary transition-colors">حلول التقنية المتكاملة</h2>
+<p class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                                    حي الملقا، الرياض
+                                </p>
+</div>
+<div class="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center p-2.5 border border-slate-100">
+<img alt="Logo" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB3gmslbrT94qUnXSGePbLp1KVYqts2WNi5zTs4-6tcW7F4MhyGfkG8vjLToeFTFkJuDbkzuznGj2DOnnVGx8M0MIpXTIlFIGvS3KWzP7YVsJZDVmDSqaXLu0Kuem0KvyceL4aAq_FtPmmjpLoIc5xe2xbc1sRmKlmKMVRKZBrxvE3R1ShMX5GeyvVo42hlvSISZdGYUY7-OKIhfm2quOT4SwMGmZU-MI6HY-yzg41yng4FKvgvvr8wBDo55FuVb139rBFGNnH3g"/>
+</div>
+</div>
+<p class="text-sm text-slate-600 leading-relaxed mb-8 line-clamp-2 font-medium">نقدم خدمات برمجية مخصصة للشركات الناشئة والمتوسطة، مع التركيز على الابتكار وتجربة المستخدم المميزة.</p>
+<div class="flex items-center justify-between pt-5 border-t border-slate-50">
+<span class="text-xs font-bold text-emerald-vibrant flex items-center gap-2">
+<span class="w-2 h-2 bg-emerald-vibrant rounded-full animate-pulse"></span>
+                                مفتوح الآن
+                            </span>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group-hover:translate-x-[-4px] transition-transform">
+                                التفاصيل
+                                <span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-glass border border-slate-100 transition-all duration-500 group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Architecture" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0UkXnkFtYTxppvVG-KAx4DGqXybIhwpFksC6CIp1kS62CvGbSn4gyt0jrud-BS0yvXLfF0JmoIhZMKXE4O8WHe0e7HQ0n3k34BmrMmpaVDo_1KLV61CP9pN5rPzxfuxov99fMkkPyQLJjEQmL_FrsnaNXjR92-uSktKnNXRL_5GBigDYYtl1iKhTOLQCwOIVJmNzbglWfLY-cE9FYMj-tmXfE0jey4kfIlRYlkRV_ZELvaO-3p56n1N8ofpbHb8eD8dpGMiSp1g"/>
+<div class="absolute top-4 right-4">
+<span class="bg-emerald-vibrant/90 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1">verified</span>
+                                موثق
+                            </span>
+</div>
+<div class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+<div class="flex items-center gap-1.5">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+</div>
+<span class="text-white text-xs font-bold">5.0 (86)</span>
+</div>
+</div>
+</div>
+<div class="p-7">
+<div class="flex justify-between items-start mb-5">
+<div>
+<h2 class="text-xl font-extrabold text-slate-900 mb-2 group-hover:text-primary transition-colors">مجموعة الإتقان الهندسية</h2>
+<p class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                                    الخبر، المنطقة الشرقية
+                                </p>
+</div>
+<div class="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center p-2.5 border border-slate-100">
+<img alt="Logo" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsU8gXAYO8s2yLyzeqJGoCBQX7xcvF_kAs_6h-IC72MZiRkTvQmz2GxQi_1X5f4lp1GCzIVZOI9uvq74-m6n1jye_lHTtv0thiAWspq57EKzHMnHHSjjT2ZLpCTDYc2KTZRghw9H_Cdrg-_TlEgg1ULEhCy9DSnvqHCIqZEST633TjNUYdiGF08aqzL4W2v14rMb65XIMDhreJUAkp9lLVyF0vm-JI4JIqJqt-vbOdGm59yH4urzuu87pQMR_7r4x5csEUluGSPQ"/>
+</div>
+</div>
+<p class="text-sm text-slate-600 leading-relaxed mb-8 line-clamp-2 font-medium">رواد في التصميم المعماري والإنشائي، نجمع بين التراث المعماري والتقنيات الحديثة لبناء مستقبل مستدام.</p>
+<div class="flex items-center justify-between pt-5 border-t border-slate-50">
+<span class="text-xs font-bold text-slate-400 flex items-center gap-2">
+<span class="w-2 h-2 bg-slate-300 rounded-full"></span>
+                                مغلق حالياً
+                            </span>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group-hover:translate-x-[-4px] transition-transform">
+                                التفاصيل
+                                <span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-glass border border-slate-100 transition-all duration-500 group">
+<div class="relative h-56 overflow-hidden">
+<img alt="Agency" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1hlgM02a16ewgDoq-n93wrIsb5bjkGCViuBo8QH7BRVdGzP4kU0KSGIzH8st034VTb9N31LSgYe8FoQc8poYtfMPIvm3A63PWAah74CeXDTuihUqIvbp5U2_D5bcwYKhLgZ-_XasFWToLhj6Lu3xnP-psSFzuqzmJGSt2sTsjqrqWnRLhbLIQSbszGEAODlGr8AJDj4SyG2jIZMn98g2BuUfUMItoZb3WsiHlseNORZ6maZkkLbtyLeYQMraPvX2UsY1qXSYk1g"/>
+<div class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+<div class="flex items-center gap-1.5">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+</div>
+<span class="text-white text-xs font-bold">4.2 (42)</span>
+</div>
+</div>
+</div>
+<div class="p-7">
+<div class="flex justify-between items-start mb-5">
+<div>
+<h2 class="text-xl font-extrabold text-slate-900 mb-2 group-hover:text-primary transition-colors">وكالة الأفق الإبداعي</h2>
+<p class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                                    جدة، حي الروضة
+                                </p>
+</div>
+<div class="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center p-2.5 border border-slate-100">
+<img alt="Logo" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFhXhF9flFMacRlXjzg1tlwSHZfNSlSf_dM9qGLhFgU-nagXENdf-_nKF6YcYaRDB95uo6wi5MJAJNTT6-uF_X1rx0F8X8NkghJcUwbJ_siDSEG4V3WVkDORdnZQveBpWck_ifllijcFlDi63HYRKlqPvSrNgf7Pc59Q4YA2RVNDgEO1a60ZL8ASyLIGkfgZUaIOWlaAACfJZ8nLKb2D-vVFcQdBpv_BIVEvNOoyCfY11QeisgiVwgrDadHEy5SaTRxaF7gI5SgA"/>
+</div>
+</div>
+<p class="text-sm text-slate-600 leading-relaxed mb-8 line-clamp-2 font-medium">وكالة تسويق رقمي متكاملة تساعد العلامات التجارية على النمو من خلال استراتيجيات مبنية على البيانات.</p>
+<div class="flex items-center justify-between pt-5 border-t border-slate-50">
+<span class="text-xs font-bold text-emerald-vibrant flex items-center gap-2">
+<span class="w-2 h-2 bg-emerald-vibrant rounded-full"></span>
+                                مفتوح الآن
+                            </span>
+<button class="text-primary text-sm font-bold flex items-center gap-1 group-hover:translate-x-[-4px] transition-transform">
+                                التفاصيل
+                                <span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 4 (Ad) -->
+<article class="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-glass border-2 border-primary/10 transition-all duration-500 group relative">
+<div class="relative h-56 overflow-hidden">
+<img alt="Cafe" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgz_bQhqofY3b3hLWlLmLGZUwe2OHcsm9V0iQY1EpDLUpt5IKyutDXAO5D-Jj6HcAdhOy8K5wuehLOv6mSnFmKj6NdxRATaK2linOrNKbjv-tp39co35OrU-tmv-3-HW_c22_TPAm4z3aCqnRZfIgFvIZZxwWA4Z2AoR8WPFI4VbO_AbXNp3nDI57iODZ5oIxkpYbztplyRFCoqrisMtSqm5R2RgBUJZJKqJbdTPxpHZKDnabIRCHNzcSmewyORTbUc7tn3Si_xA"/>
+<div class="absolute top-4 right-4">
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-3 py-1.5 rounded-lg">إعلان</span>
+</div>
+<div class="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
+<div class="flex items-center gap-1.5">
+<div class="flex text-yellow-400">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+</div>
+<span class="text-white text-xs font-bold">4.9 (210)</span>
+</div>
+</div>
+</div>
+<div class="p-7">
+<div class="flex justify-between items-start mb-5">
+<div>
+<h2 class="text-xl font-extrabold text-slate-900 mb-2 group-hover:text-primary transition-colors">مختبر القهوة المختصة</h2>
+<p class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-slate-400">location_on</span>
+                                    مجمع واجهة الرياض، الرياض
+                                </p>
+</div>
+<div class="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center p-2.5 border border-slate-100">
+<img alt="Logo" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFsodCMzqo_bu1UvoFivHakDsv04Mv3cTrtC-0p4BJKNNU-uHRmmIbZctvTcBU__2KTyovPE2FxV-YCg-0A9QJD3GeX8gL-5AHPjPVxQIieMqoWleD3YME0WjNCGGT0FChV5iZXWnkjm4jqtRlX_QUgpIG21Vhlta9vFyLUwpiI6DfykODPuLcB80njcpXIzhR3hvUKDYqwT9UEYiw1RXgIX0Rcez4uCdR8fEKGJHVZBvmBrOpS7otKQ34XljFTnyL3xietxFmig"/>
+</div>
+</div>
+<p class="text-sm text-slate-600 leading-relaxed mb-8 line-clamp-2 font-medium">وجهتكم لتذوق أجود أنواع البن العالمي المحمص محلياً بكل إتقان وشغف.</p>
+<div class="flex items-center justify-between pt-5 border-t border-slate-50">
+<span class="text-xs font-bold text-emerald-vibrant flex items-center gap-2">
+<span class="w-2 h-2 bg-emerald-vibrant rounded-full animate-pulse"></span>
+                                مفتوح الآن
+                            </span>
+<button class="bg-primary text-white text-xs font-bold px-6 py-2.5 rounded-xl hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95">
+                                احجز الآن
+                            </button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<nav class="mt-16 flex justify-center items-center gap-3">
+<button class="w-12 h-12 rounded-xl flex items-center justify-center bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-12 h-12 rounded-xl flex items-center justify-center bg-primary text-white font-bold shadow-lg shadow-primary/20">1</button>
+<button class="w-12 h-12 rounded-xl flex items-center justify-center bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm font-medium">2</button>
+<button class="w-12 h-12 rounded-xl flex items-center justify-center bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm font-medium">3</button>
+<span class="mx-2 text-slate-300 font-bold">...</span>
+<button class="w-12 h-12 rounded-xl flex items-center justify-center bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm font-medium">12</button>
+<button class="w-12 h-12 rounded-xl flex items-center justify-center bg-white border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all shadow-sm">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+</nav>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 text-slate-300 py-16 px-8 border-t border-slate-800">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+<div class="flex flex-col gap-6 max-w-sm">
+<span class="text-2xl font-black text-white tracking-tight">DirectoryPro</span>
+<p class="text-sm leading-relaxed text-slate-400">
+                المنصة الرائدة لعرض وتنمية أعمالك في المنطقة. نساعدك على الوصول إلى جمهورك المستهدف من خلال تجربة بحث عصرية وذكية.
+            </p>
+<div class="flex items-center gap-4">
+<a class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">share</span></a>
+<a class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all" href="#"><span class="material-symbols-outlined text-xl">alternate_email</span></a>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12 flex-1 md:justify-items-end">
+<div class="space-y-4">
+<h4 class="text-white font-bold text-sm">الشركة</h4>
+<ul class="space-y-2 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">عن المنصة</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">الوظائف</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">المدونة</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-white font-bold text-sm">الدعم</h4>
+<ul class="space-y-2 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">مركز المساعدة</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">اتصل بنا</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">الأسئلة الشائعة</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-white font-bold text-sm">قانوني</h4>
+<ul class="space-y-2 text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">سياسة الخصوصية</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">شروط الخدمة</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">الكوكيز</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-screen-2xl mx-auto mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-slate-500">
+<p>© 2024 DirectoryPro. جميع الحقوق محفوظة</p>
+<div class="flex items-center gap-6">
+<span>اللغة: العربية</span>
+<span>المنطقة: المملكة العربية السعودية</span>
+</div>
+</div>
+</footer>
+<!-- Bottom Navigation for Mobile -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 z-50 px-6 py-4 shadow-[0_-4px_20px_-1px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center">
+<button class="flex flex-col items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">explore</span>
+<span class="text-[10px] font-bold">استكشف</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-2xl">category</span>
+<span class="text-[10px] font-bold">الأقسام</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-2xl">favorite</span>
+<span class="text-[10px] font-bold">المفضلة</span>
+</button>
+<button class="flex flex-col items-center gap-1.5 text-slate-400">
+<span class="material-symbols-outlined text-2xl">person</span>
+<span class="text-[10px] font-bold">حسابي</span>
+</button>
+</div>
+</div>
+</body></html>

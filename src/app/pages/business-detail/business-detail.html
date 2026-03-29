@@ -1,0 +1,143 @@
+@if (business$ | async; as business) {
+  <main class="pt-20">
+    <!-- Editorial Hero Section -->
+    <section class="relative min-h-[550px] w-full flex items-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img alt="Company Banner" class="w-full h-full object-cover" [src]="business.imageUrl || 'https://via.placeholder.com/1200x600'"/>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+      </div>
+      <div class="relative z-10 w-full max-w-screen-2xl mx-auto px-8 py-12">
+        <div class="flex flex-col md:flex-row items-center md:items-end gap-8">
+          <div class="shrink-0 relative">
+            <div class="w-40 h-40 md:w-52 md:h-52 rounded-3xl bg-white p-3 shadow-2xl">
+              <img alt="Company Logo" class="w-full h-full object-cover rounded-2xl" [src]="business.imageUrl || 'https://via.placeholder.com/200x200'"/>
+            </div>
+          </div>
+          <div class="flex-1 text-center md:text-right space-y-4">
+            <div class="flex flex-wrap items-center justify-center md:justify-end gap-3 flex-row-reverse">
+              <span class="bg-primary/20 backdrop-blur-md text-white text-[10px] font-black tracking-widest px-3 py-1 rounded-full border border-primary/30 uppercase">{{ business.category }}</span>
+              @if (business.verified) {
+                <div class="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                  <span class="material-symbols-outlined text-yellow-400 !text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                  <span class="text-white text-[10px] font-bold tracking-widest uppercase">Verified Studio</span>
+                </div>
+              }
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black text-white font-headline leading-tight tracking-tight">{{ business.name }}</h1>
+            <div class="flex flex-wrap items-center justify-center md:justify-end gap-6 text-white/90 flex-row-reverse">
+              <div class="flex items-center gap-2 flex-row-reverse">
+                <span class="text-lg font-bold">{{ business.rating }}</span>
+                <div class="flex text-yellow-400">
+                  <span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <span class="text-sm text-white/60">({{ business.reviewCount }} Reviews)</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm font-medium flex-row-reverse">
+                {{ business.city }}, {{ business.address }}
+                <span class="material-symbols-outlined !text-lg text-primary-fixed">location_on</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <button class="flex-1 sm:flex-none justify-center bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3.5 rounded-2xl font-bold flex items-center gap-2 hover:bg-white/20 transition-all active:scale-95">
+              <span class="material-symbols-outlined">share</span> Share
+            </button>
+            <button class="flex-1 sm:flex-none justify-center bg-primary text-white px-10 py-3.5 rounded-2xl font-bold flex items-center gap-3 shadow-2xl shadow-primary/40 hover:bg-primary/90 transition-all active:scale-95">
+              تواصل الآن
+              <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Grid -->
+    <section class="max-w-screen-2xl mx-auto px-8 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Left Column: Primary Content -->
+      <div class="lg:col-span-8 space-y-16 text-right">
+        <!-- About Section -->
+        <div class="space-y-8">
+          <div class="inline-flex items-center gap-4 group justify-end w-full">
+            <h2 class="text-3xl font-black font-headline tracking-tight">وصف احترافي</h2>
+            <span class="w-12 h-1 bg-primary rounded-full group-hover:w-16 transition-all duration-500"></span>
+          </div>
+          <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100">
+            <p class="text-on-surface-variant leading-relaxed text-xl font-body">
+              {{ business.description }}
+            </p>
+          </div>
+        </div>
+
+        <!-- Gallery -->
+        @if (business.gallery && business.gallery.length > 0) {
+          <div class="space-y-8">
+            <div class="flex justify-between items-center flex-row-reverse">
+              <div class="inline-flex items-center gap-4 group">
+                <h2 class="text-3xl font-black font-headline tracking-tight">صور / أعمال</h2>
+                <span class="w-12 h-1 bg-primary rounded-full group-hover:w-16 transition-all duration-500"></span>
+              </div>
+            </div>
+            <div class="grid grid-cols-6 grid-rows-2 gap-4 h-[600px]">
+              @for (img of business.gallery; track img; let i = $index) {
+                @if (i === 0) {
+                  <div class="col-span-3 row-span-2 group relative overflow-hidden rounded-3xl">
+                    <img [src]="img" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery Image 1"/>
+                  </div>
+                } @else if (i === 1) {
+                  <div class="col-span-3 row-span-1 group relative overflow-hidden rounded-3xl">
+                    <img [src]="img" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery Image 2"/>
+                  </div>
+                } @else if (i === 2) {
+                  <div class="col-span-3 row-span-1 group relative overflow-hidden rounded-3xl">
+                    <img [src]="img" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery Image 3"/>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Right Column: Sidebar -->
+      <aside class="lg:col-span-4 space-y-10 text-right">
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden sticky top-28">
+          <div class="p-8 border-b border-slate-100">
+            <h3 class="text-xl font-black font-headline tracking-tight mb-2">Contact & Info</h3>
+            <p class="text-sm text-on-surface-variant font-medium">Connect with our team</p>
+          </div>
+          <div class="p-8 space-y-8">
+            <div class="flex gap-4 flex-row-reverse">
+              <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                <span class="material-symbols-outlined text-primary">pin_drop</span>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Address</span>
+                <p class="text-sm font-bold leading-relaxed">{{ business.address }}</p>
+              </div>
+            </div>
+            <div class="flex gap-4 flex-row-reverse">
+              <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                <span class="material-symbols-outlined text-primary">phone_iphone</span>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Phone</span>
+                <p class="text-sm font-bold">{{ business.phone }}</p>
+              </div>
+            </div>
+            @if (business.website) {
+              <div class="flex gap-4 flex-row-reverse">
+                <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                  <span class="material-symbols-outlined text-primary">language</span>
+                </div>
+                <div class="space-y-1">
+                  <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Website</span>
+                  <p class="text-sm font-bold"><a [href]="business.website" target="_blank" class="text-primary hover:underline">{{ business.website }}</a></p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+}

@@ -1,0 +1,89 @@
+<main class="pt-20">
+  <!-- Hero Section -->
+  <section class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden bg-white">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,_rgba(16,185,129,0.03)_0%,_transparent_70%)]"></div>
+    <div class="max-w-4xl w-full text-center space-y-10">
+      <div class="inline-flex items-center gap-2 bg-accent/5 text-accent px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+        </span>
+        دليل الأعمال الفاخر
+      </div>
+      <h1 class="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight leading-[1.1]">
+        المساحة المنسقة لنمو <span class="text-accent italic">أعمالك</span>
+      </h1>
+      <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl mx-auto leading-relaxed opacity-80">
+        اكتشف الخدمات المهنية بدقة تحريرية عالية. تواصل مع الشركات ذات السلطة العالية في جميع أنحاء المنطقة.
+      </p>
+      <!-- Minimalist Search Bar -->
+      <div class="max-w-3xl mx-auto w-full mt-12 px-2">
+        <div class="bg-white shadow-[0_4px_60px_-12px_rgba(15,23,42,0.08)] rounded-full p-2 border border-slate-100 flex items-center gap-2">
+          <div class="flex-1 flex items-center px-4 gap-3">
+            <span class="material-symbols-outlined text-slate-400">search</span>
+            <input #searchInput class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-medium placeholder:text-slate-400 text-sm md:text-base text-right" placeholder="ابحث عن نشاط تجاري أو خدمة..." type="text"/>
+          </div>
+          <button [routerLink]="['/search']" [queryParams]="{q: searchInput.value}" class="bg-primary hover:bg-secondary text-white px-8 py-3.5 rounded-full font-bold transition-all flex items-center gap-2 text-sm shadow-xl shadow-primary/20">
+            بحث
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Section -->
+  <section class="bg-slate-50 py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center mb-16">
+        <div class="text-right w-full">
+          <span class="text-accent font-bold tracking-widest uppercase text-xs">مختارات المحرر</span>
+          <h2 class="text-3xl font-extrabold text-secondary mt-2">الأعمال المميزة هذا الأسبوع</h2>
+        </div>
+      </div>
+      
+      @if (featuredBusinesses$ | async; as businesses) {
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          @if (businesses[0]) {
+            <div [routerLink]="['/business', businesses[0].id]" class="lg:col-span-2 group relative overflow-hidden rounded-[2.5rem] bg-secondary h-[500px] shadow-2xl cursor-pointer">
+              <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-60" [src]="businesses[0].imageUrl"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/20 to-transparent"></div>
+              <div class="absolute bottom-0 right-0 p-12 w-full flex justify-between items-end">
+                <div class="text-white space-y-4 text-right">
+                  <span class="inline-block bg-accent px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">نشاط موثق</span>
+                  <h3 class="text-4xl font-extrabold tracking-tight">{{ businesses[0].name }}</h3>
+                  <p class="text-white/70 max-w-sm text-lg line-clamp-2">{{ businesses[0].description }}</p>
+                </div>
+                <button class="bg-white text-secondary w-16 h-16 rounded-full flex items-center justify-center shadow-xl active:scale-90 transition-transform">
+                  <span class="material-symbols-outlined">north_west</span>
+                </button>
+              </div>
+            </div>
+          }
+          
+          <div class="space-y-8">
+            @for (business of businesses.slice(1, 3); track business.id) {
+              <div [routerLink]="['/business', business.id]" class="bg-white p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all border border-slate-100 group cursor-pointer text-right">
+                <div class="flex gap-6 items-center flex-row-reverse">
+                  <div class="w-20 h-20 rounded-2xl overflow-hidden shadow-inner shrink-0">
+                    <img class="w-full h-full object-cover" [src]="business.imageUrl"/>
+                  </div>
+                  <div class="flex-1">
+                    <h4 class="font-bold text-xl text-secondary">{{ business.name }}</h4>
+                    <p class="text-xs text-on-surface-variant font-medium mt-1">{{ business.category }}</p>
+                  </div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-slate-50 flex items-center justify-between flex-row-reverse">
+                  <div class="flex items-center gap-1.5 bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">star</span>
+                    <span class="text-sm font-extrabold">{{ business.rating }}</span>
+                  </div>
+                  <span class="text-accent font-bold text-xs uppercase tracking-widest">مفتوح الآن</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</main>
