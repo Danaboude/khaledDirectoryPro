@@ -21,6 +21,7 @@ const password = process.env.password || '';
 
 const envConfigFile = `export const environment = {
   production: true,
+  password: '${password}',
   firebase: {
     apiKey: '${firebaseApiKey}',
     authDomain: '${firebaseAuthDomain}',
@@ -28,7 +29,6 @@ const envConfigFile = `export const environment = {
     storageBucket: '${firebaseStorageBucket}',
     messagingSenderId: '${firebaseMessagingSenderId}',
     appId: '${firebaseAppId}',
-    password: '${password}',
   }
 };
 `;
