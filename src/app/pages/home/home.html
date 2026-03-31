@@ -11,25 +11,26 @@
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
         </span>
-        دليل الشركات الناشئة السورية
+        الدليل الحصري لرواد JCI سوريا
       </div>
       <h1 class="text-5xl md:text-7xl font-extrabold text-secondary tracking-tight leading-[1.1]">
-        المساحة المنسقة لنمو <span class="text-accent italic">بوابتك</span>
+        بوابة... نصلك بالنجاح
       </h1>
       <p class="text-on-surface-variant text-lg md:text-xl max-w-2xl mx-auto leading-relaxed opacity-80">
-        اكتشف الشركات الناشئة الأكثر ابتكاراً في سوريا. تواصل مع رواد الأعمال وبوابات النجاح في جميع أنحاء المحافظات.
+        حيث تتحول روابط الزمالة إلى محرك اقتصادي يبتكر المستقبل؛ استكشف مشاريع زملائك في الغرفة، تواصل مع المبدعين، وابدأ بوابتك الخاصة من قلب محافظتك.
       </p>
       <!-- Enhanced Search Bar -->
       <div class="max-w-4xl mx-auto w-full mt-12 px-2">
         <div
           class="bg-white shadow-[0_4px_60px_-12px_rgba(15,23,42,0.08)] rounded-[2rem] p-2 border border-slate-100 flex flex-col md:flex-row-reverse items-center gap-2 transition-all duration-300 focus-within:ring-4 focus-within:ring-primary/5 focus-within:border-primary/20">
-          <!-- Category Selection -->
+          <!-- Sector Selection -->
           <div
             class="w-full md:w-48 flex items-center px-4 gap-3 border-b md:border-b-0 md:border-r border-slate-100 pb-2 md:pb-0 flex-row-reverse">
             <span class="material-symbols-outlined text-slate-400 text-xl">grid_view</span>
             <select #categoryInput
               class="w-full bg-transparent border-none focus:ring-0 text-on-surface font-bold text-sm appearance-none cursor-pointer py-2 text-right">
-              <option value="">كل الفئات</option>
+              <option value="">كل القطاعات</option>
+
               @for (cat of categories$ | async; track cat.id) {
               <option [value]="cat.name">{{ cat.name }}</option>
               }

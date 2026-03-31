@@ -94,7 +94,7 @@ import { Component } from '@angular/core';
         <div class="flex flex-col items-center justify-center gap-20">
           <div class="group cursor-pointer">
             <div class="bg-white px-12 py-8 rounded-full shadow-soft hover:shadow-glass hover:scale-105 transition-all duration-500 flex items-center justify-center border border-slate-50 mx-auto w-fit">
-              <img src="/jci.png" class="h-16 w-auto grayscale group-hover:grayscale-0 transition-all duration-500" alt="JCI Syria">
+              <img src="/jci.png" class="h-25 w-auto grayscale group-hover:grayscale-0 transition-all duration-500" alt="JCI Syria">
             </div>
             <p class="mt-8 text-slate-400 font-medium max-w-sm mx-auto leading-relaxed">
               تعاون استراتيجي لدعم ريادة الأعمال والتمكين المجتمعي في المناطق المحلية.

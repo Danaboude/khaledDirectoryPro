@@ -1,10 +1,17 @@
 <ng-container *ngIf="authService.isDashboardUnlocked$ | async; else lockedTemplate">
   @if (authService.user$ | async; as user) {
-    <div class="flex min-h-screen bg-slate-50">
+    <div class="flex min-h-screen bg-slate-50 relative overflow-x-hidden">
+      
+      <!-- Mobile Sidebar Overlay -->
+      <div *ngIf="showMobileSidebar" (click)="showMobileSidebar = false" class="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm transition-opacity"></div>
+
       <!-- SideNavBar -->
-      <aside class="hidden lg:flex flex-col fixed left-0 top-0 h-screen w-72 border-r border-slate-100 bg-white z-40 text-right">
-        <div class="px-8 py-8">
+      <aside [class.flex]="showMobileSidebar" [class.hidden]="!showMobileSidebar" class="lg:flex flex-col fixed left-0 top-0 h-screen w-72 border-r border-slate-100 bg-white z-50 text-right transition-all">
+        <div class="px-8 py-8 flex justify-between items-center flex-row-reverse">
           <img src="/logo.png" class="h-10 w-auto" alt="Bawaba">
+          <button (click)="showMobileSidebar = false" class="lg:hidden text-slate-400">
+            <span class="material-symbols-outlined">close</span>
+          </button>
         </div>
         <nav class="flex-1 px-4 space-y-1.5 overflow-y-auto">
           <a class="flex items-center justify-end gap-3 px-4 py-3.5 bg-sky-50 text-primary font-bold rounded-xl transition-all flex-row-reverse" href="#">
@@ -17,7 +24,7 @@
           </button>
           <button (click)="showCategoryModal = true" class="w-full flex items-center justify-end gap-3 px-4 py-3.5 text-on-surface-variant hover:bg-slate-50 hover:text-on-surface rounded-xl transition-all flex-row-reverse">
             <span class="material-symbols-outlined">category</span>
-            <span class="text-[15px]">إدارة التصنيفات</span>
+            <span class="text-[15px]">إدارة القطاعات</span>
           </button>
         </nav>
         <div class="p-4 border-t border-slate-100">
@@ -29,24 +36,29 @@
       </aside>
 
       <main class="lg:ml-72 flex-1 min-h-screen">
-        <header class="h-20 flex items-center justify-between px-10 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 flex-row-reverse">
-          <div class="text-right">
-            <h1 class="text-2xl font-extrabold font-headline tracking-tight text-on-surface">نظرة عامة</h1>
-            <p class="text-xs text-on-surface-variant font-medium">مرحباً بك، {{ user.displayName }}</p>
+        <header class="h-20 flex items-center justify-between px-6 md:px-10 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-30 flex-row-reverse">
+          <div class="flex items-center gap-4 flex-row-reverse">
+            <button (click)="showMobileSidebar = true" class="lg:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-xl">
+              <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="text-right">
+              <h1 class="text-xl md:text-2xl font-extrabold font-headline tracking-tight text-on-surface">نظرة عامة</h1>
+              <p class="text-[10px] md:text-xs text-on-surface-variant font-medium">مرحباً بك، {{ user.displayName }}</p>
+            </div>
           </div>
-          <button (click)="openAddBusinessModal()" class="bg-primary text-white px-8 py-3 rounded-2xl font-bold text-sm shadow-lg shadow-primary/20">إضافة شركة</button>
+          <button (click)="openAddBusinessModal()" class="bg-primary text-white px-4 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl font-bold text-xs md:text-sm shadow-lg shadow-primary/20">إضافة شركة</button>
         </header>
 
-        <div class="max-w-[1400px] mx-auto px-10 py-10 space-y-10">
-          <section class="bg-white p-10 rounded-[2rem] shadow-sm border border-slate-100 text-right">
-            <h2 class="text-2xl font-extrabold font-headline text-on-surface mb-10">الشركات المسجلة</h2>
+        <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-10 space-y-10">
+          <section class="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm border border-slate-100 text-right">
+            <h2 class="text-xl md:text-2xl font-extrabold font-headline text-on-surface mb-10">الشركات المسجلة</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               @for (business of userBusinesses$ | async; track business.id) {
                 <div class="border border-slate-100 rounded-2xl p-4 flex flex-col gap-4 group">
                   <div class="relative h-40 overflow-hidden rounded-xl">
                     <img [src]="business.imageUrl || 'https://via.placeholder.com/300x200'" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Business Image">
                   </div>
-                  <h3 class="font-bold text-lg">{{ business.name }}</h3>
+                  <h3 class="font-bold text-lg text-right">{{ business.name }}</h3>
                   <div class="flex justify-between items-center flex-row-reverse">
                     <span class="text-sm text-slate-500">{{ business.category }}</span>
                     <div class="flex gap-2">
@@ -64,49 +76,49 @@
 
     <!-- Business Modal -->
     <div *ngIf="showAddBusinessModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div class="bg-white rounded-[2rem] w-full max-w-3xl max-h-[90vh] overflow-y-auto p-10 text-right">
+      <div class="bg-white rounded-[2rem] w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 md:p-10 text-right">
         <div class="flex justify-between items-center mb-8 flex-row-reverse">
-          <h2 class="text-2xl font-black">{{ newBusiness.id ? 'تعديل بيانات الشركة' : 'إضافة شركة جديدة' }}</h2>
+          <h2 class="text-xl md:text-2xl font-black">{{ newBusiness.id ? 'تعديل بيانات الشركة' : 'إضافة شركة جديدة' }}</h2>
           <button (click)="closeBusinessModal()" class="text-slate-400"><span class="material-symbols-outlined">close</span></button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          <div class="space-y-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+          <div class="space-y-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">اسم الشركة</label>
             <input [(ngModel)]="newBusiness.name" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="أدخل اسم الشركة">
           </div>
-          <div class="space-y-2">
-            <label class="text-sm font-bold text-slate-500 pr-1">التصنيف</label>
+          <div class="space-y-2 text-right">
+            <label class="text-sm font-bold text-slate-500 pr-1">القطاع</label>
             <select [(ngModel)]="newBusiness.category" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all">
-              <option value="">اختر التصنيف</option>
+              <option value="">اختر القطاع</option>
               @for (cat of categories$ | async; track cat.id) {
                 <option [value]="cat.name">{{ cat.name }}</option>
               }
             </select>
           </div>
-          <div class="space-y-2">
+          <div class="space-y-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">رقم الهاتف</label>
             <input [(ngModel)]="newBusiness.phone" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="+963 ...">
           </div>
-          <div class="space-y-2">
+          <div class="space-y-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">الموقع الإلكتروني</label>
             <input [(ngModel)]="newBusiness.website" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="www.example.com">
           </div>
-          <div class="space-y-2 md:col-span-2">
+          <div class="space-y-2 md:col-span-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">العنوان بالتفصيل</label>
             <input [(ngModel)]="newBusiness.address" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="المحافظة، الحي، الشارع...">
           </div>
-          <div class="space-y-2 md:col-span-2">
+          <div class="space-y-2 md:col-span-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">وصف الشركة</label>
             <textarea [(ngModel)]="newBusiness.description" rows="4" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="اكتب وصفاً جذاباً للشركة..."></textarea>
           </div>
-          <div class="space-y-2 md:col-span-2">
+          <div class="space-y-2 md:col-span-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">رابط الشعار الرئيسي (Main Image URL)</label>
             <input [(ngModel)]="newBusiness.imageUrl" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="https://...">
           </div>
 
           <!-- Gallery Links -->
-          <div class="space-y-4 md:col-span-2 border-t border-slate-100 pt-8 mt-4">
+          <div class="space-y-4 md:col-span-2 border-t border-slate-100 pt-8 mt-4 text-right">
             <label class="text-lg font-black block">معرض الصور (Gallery)</label>
             <div class="flex gap-2 flex-row-reverse">
               <input [(ngModel)]="newGalleryLink" class="flex-1 bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="أضف رابط صورة جديد...">
@@ -124,7 +136,7 @@
             </div>
           </div>
 
-          <div class="md:col-span-2 flex items-center justify-end gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 flex-row-reverse">
+          <div class="md:col-span-2 flex items-center justify-end gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100 flex-row-reverse text-right">
             <input type="checkbox" [(ngModel)]="newBusiness.verified" class="w-6 h-6 text-primary rounded border-slate-300 focus:ring-primary">
             <label class="font-bold text-on-surface">نشاط موثق (Verified Startup)</label>
           </div>
@@ -139,14 +151,14 @@
 
     <!-- Category Modal -->
     <div *ngIf="showCategoryModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div class="bg-white rounded-[2rem] w-full max-w-lg p-10 text-right">
-        <div class="flex justify-between items-center mb-8 flex-row-reverse">
-          <h2 class="text-2xl font-black">إدارة التصنيفات</h2>
+      <div class="bg-white rounded-[2rem] w-full max-w-lg p-6 md:p-10 text-right">
+        <div class="flex justify-between items-center mb-8 flex-row-reverse text-right">
+          <h2 class="text-xl md:text-2xl font-black">إدارة القطاعات</h2>
           <button (click)="showCategoryModal = false" class="text-slate-400"><span class="material-symbols-outlined">close</span></button>
         </div>
         
         <div class="flex gap-2 mb-8 flex-row-reverse">
-          <input [(ngModel)]="newCategoryName" class="flex-1 bg-slate-50 border-slate-200 rounded-xl p-4 text-right" placeholder="اسم التصنيف الجديد">
+          <input [(ngModel)]="newCategoryName" class="flex-1 bg-slate-50 border-slate-200 rounded-xl p-4 text-right" placeholder="اسم القطاع الجديد">
           <button (click)="saveCategory()" class="bg-primary text-white px-6 rounded-xl font-bold">{{ editingCategory ? 'تحديث' : 'إضافة' }}</button>
         </div>
 
@@ -164,12 +176,12 @@
       </div>
     </div>
   } @else {
-    <div class="min-h-screen flex items-center justify-center bg-slate-50">
-      <div class="bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-100 text-center max-w-md w-full">
+    <div class="min-h-screen flex items-center justify-center bg-slate-50 px-6">
+      <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-slate-100 text-center max-w-md w-full">
         <div class="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8">
           <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">account_circle</span>
         </div>
-        <h2 class="text-3xl font-black mb-4 tracking-tight">تسجيل الدخول</h2>
+        <h2 class="text-2xl md:text-3xl font-black mb-4 tracking-tight">تسجيل الدخول</h2>
         <p class="text-slate-500 font-medium mb-10 leading-relaxed">يرجى تسجيل الدخول باستخدام حساب Google للوصول إلى لوحة التحكم.</p>
         <button (click)="authService.loginWithGoogle()" class="w-full bg-primary text-white py-5 rounded-2xl font-bold text-lg shadow-xl shadow-primary/25 hover:scale-[1.02] transition-all active:scale-[0.98]">
           تسجيل الدخول بواسطة Google
@@ -180,13 +192,13 @@
 </ng-container>
 
 <ng-template #lockedTemplate>
-  <div class="min-h-screen flex items-center justify-center bg-slate-50">
-    <div class="bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-100 text-center max-w-md w-full">
+  <div class="min-h-screen flex items-center justify-center bg-slate-50 px-6">
+    <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl border border-slate-100 text-center max-w-md w-full">
       <div class="w-20 h-20 bg-primary/10 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8">
         <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1">lock</span>
       </div>
-      <h2 class="text-3xl font-black mb-4 tracking-tight">الدخول المحمي</h2>
-      <p class="text-slate-500 font-medium mb-10 leading-relaxed">يرجى إدخال كلمة مرور لوحة التحكم للمتابعة، حتى بعد تسجيل الدخول بـ Google.</p>
+      <h2 class="text-2xl md:text-3xl font-black mb-4 tracking-tight">الدخول المحمي</h2>
+      <p class="text-slate-500 font-medium mb-10 leading-relaxed text-sm md:text-base">يرجى إدخال كلمة مرور لوحة التحكم للمتابعة، حتى بعد تسجيل الدخول بـ Google.</p>
       
       <div class="space-y-4">
         <div class="relative">
@@ -212,3 +224,4 @@
     </div>
   </div>
 </ng-template>
+

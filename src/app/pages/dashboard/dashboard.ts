@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   
   showAddBusinessModal = false;
   showCategoryModal = false;
+  showMobileSidebar = false;
   
   passwordInput = '';
   passwordError = false;
