@@ -16,6 +16,8 @@ const firebaseProjectId = process.env.FIREBASE_PROJECT_ID || '';
 const firebaseStorageBucket = process.env.FIREBASE_STORAGE_BUCKET || '';
 const firebaseMessagingSenderId = process.env.FIREBASE_MESSAGING_SENDER_ID || '';
 const firebaseAppId = process.env.FIREBASE_APP_ID || '';
+const password = process.env.password || '';
+
 
 const envConfigFile = `export const environment = {
   production: true,
@@ -25,7 +27,8 @@ const envConfigFile = `export const environment = {
     projectId: '${firebaseProjectId}',
     storageBucket: '${firebaseStorageBucket}',
     messagingSenderId: '${firebaseMessagingSenderId}',
-    appId: '${firebaseAppId}'
+    appId: '${firebaseAppId}',
+    password: '${password}',
   }
 };
 `;
