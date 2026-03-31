@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection, APP_ID } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 
 import { initializeApp } from 'firebase/app';
@@ -17,7 +17,7 @@ import { routes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
     provideHttpClient(),
     { provide: APP_ID, useValue: 'khaled-pages' },
     provideFirebaseApp(() => initializeApp(environment.firebase)),

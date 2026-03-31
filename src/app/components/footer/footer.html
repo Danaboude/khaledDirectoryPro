@@ -2,46 +2,51 @@
   <div class="max-w-7xl mx-auto w-full space-y-20">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
       <div class="lg:col-span-2 space-y-6 text-right">
-        <span class="text-2xl font-extrabold text-primary">DirectoryPro</span>
-        <p class="text-on-surface-variant text-sm leading-relaxed max-w-xs opacity-70">المعيار المهني لاكتشاف الأعمال. منسق بدقة لجمهور عالمي يقدر الجودة والموثوقية.</p>
+        <a routerLink="/" class="flex items-center gap-2">
+          <img src="/logo.png" class="h-10 w-auto" alt="بوابة - Bawaba">
+        </a>
+        <p class="text-on-surface-variant text-sm leading-relaxed max-w-xs opacity-70">بوابة: منصتكم الموثوقة لاستكشاف
+          الشركات الناشئة السورية وتطوير الأعمال. منسق بدقة للتميز والنمو.</p>
         <div class="flex gap-4 justify-end">
-          <a class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all" href="#">
-            <span class="material-symbols-outlined text-xl">language</span>
-          </a>
-          <a class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-secondary hover:bg-primary hover:text-white transition-all" href="#">
-            <span class="material-symbols-outlined text-xl">share</span>
-          </a>
+
         </div>
       </div>
-      <div class="space-y-6 text-right">
+      <!-- <div class="space-y-6 text-right">
         <h5 class="text-secondary font-bold text-sm tracking-widest uppercase">استكشف</h5>
         <ul class="space-y-4 text-sm text-on-surface-variant font-medium">
-          <li><a class="hover:text-accent transition-colors" href="#">خريطة الأعمال</a></li>
-          <li><a class="hover:text-accent transition-colors" href="#">القوائم المميزة</a></li>
+          <li><a class="hover:text-accent transition-colors" href="#">خريطة الشركات</a></li>
+          <li><a class="hover:text-accent transition-colors" href="#">الشركات المميزة</a></li>
           <li><a class="hover:text-accent transition-colors" href="#">قصص النجاح</a></li>
         </ul>
-      </div>
-      <div class="space-y-6 text-right">
+      </div> -->
+      <!-- <div class="space-y-6 text-right">
         <h5 class="text-secondary font-bold text-sm tracking-widest uppercase">الدعم</h5>
         <ul class="space-y-4 text-sm text-on-surface-variant font-medium">
           <li><a class="hover:text-accent transition-colors" href="#">مركز المساعدة</a></li>
           <li><a class="hover:text-accent transition-colors" href="#">تواصل معنا</a></li>
           <li><a class="hover:text-accent transition-colors" href="#">الشراكات</a></li>
         </ul>
-      </div>
+      </div> -->
       <div class="space-y-6 text-right">
         <h5 class="text-secondary font-bold text-sm tracking-widest uppercase">قانوني</h5>
         <ul class="space-y-4 text-sm text-on-surface-variant font-medium">
-          <li><a class="hover:text-accent transition-colors" href="#">سياسة الخصوصية</a></li>
-          <li><a class="hover:text-accent transition-colors" href="#">شروط الخدمة</a></li>
-          <li><a class="hover:text-accent transition-colors" href="#">ملفات تعريف الارتباط</a></li>
+          <li><a routerLink="/privacy" class="hover:text-accent transition-colors">سياسة الخصوصية</a></li>
+          <li><a routerLink="/terms" class="hover:text-accent transition-colors">شروط الخدمة</a></li>
+          <li><a routerLink="/cookies" class="hover:text-accent transition-colors">ملفات تعريف الارتباط</a></li>
         </ul>
       </div>
     </div>
-    <div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold text-slate-400 uppercase tracking-widest">
-      <p>© 2026 DirectoryPro. جميع الحقوق محفوظة.</p>
-      <div class="flex items-center gap-2">
-        مصنوع بدقة <span class="text-accent">●</span> للتميز المهني
+    <div
+      class="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold text-slate-400 uppercase tracking-widest">
+      <p>© 2026 بوابة. جميع الحقوق محفوظة.</p>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2">
+          مصنوع بدقة <span class="text-accent">●</span> للتميز الرقمي
+        </div>
+        <div class="flex items-center gap-2 opacity-60 grayscale hover:grayscale-0 transition-all cursor-pointer">
+          <span>بالشراكة مع</span>
+          <img src="/jci.png" class="h-6 w-auto" alt="JCI Syria">
+        </div>
       </div>
     </div>
   </div>

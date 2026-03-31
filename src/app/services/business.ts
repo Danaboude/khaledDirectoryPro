@@ -20,6 +20,7 @@ export interface Business {
   website: string;
   address: string;
   city: string;
+  province?: string;
   rating: number;
   reviewCount: number;
   verified: boolean;
