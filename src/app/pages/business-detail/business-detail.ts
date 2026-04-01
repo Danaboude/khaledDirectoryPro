@@ -32,4 +32,25 @@ export class BusinessDetailComponent implements OnInit {
       })
     );
   }
+
+  async share(businessName: string) {
+    if (isPlatformBrowser(this.platformId)) {
+      const shareData = {
+        title: businessName,
+        text: `Check out ${businessName} on Khaled Pages`,
+        url: window.location.href,
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(window.location.href);
+          alert('Link copied to clipboard!');
+        }
+      } catch (err) {
+        console.error('Error sharing', err);
+      }
+    }
+  }
 }
