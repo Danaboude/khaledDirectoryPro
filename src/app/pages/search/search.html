@@ -24,6 +24,23 @@
         البحث</button>
     </div>
   </div>
+  
+  <!-- Mobile Categories Scroll (Visible on Mobile Only) -->
+  <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto no-scrollbar flex flex-row-reverse gap-3">
+    @for (cat of categories$ | async; track cat.id) {
+    <button (click)="toggleCategory(cat.name)"
+      class="px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all border shrink-0"
+      [class.bg-primary]="(selectedCategory$ | async) === cat.name"
+      [class.text-white]="(selectedCategory$ | async) === cat.name"
+      [class.border-transparent]="(selectedCategory$ | async) === cat.name"
+      [class.bg-white]="(selectedCategory$ | async) !== cat.name"
+      [class.text-slate-600]="(selectedCategory$ | async) !== cat.name"
+      [class.border-slate-100]="(selectedCategory$ | async) !== cat.name"
+      [class.shadow-sm]="(selectedCategory$ | async) !== cat.name">
+      {{ cat.name }}
+    </button>
+    }
+  </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
     <!-- Sidebar Filters -->
