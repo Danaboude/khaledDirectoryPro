@@ -143,6 +143,33 @@
             <input [(ngModel)]="newBusiness.imageUrl" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="https://...">
           </div>
 
+          <!-- Social Media Section -->
+          <div class="space-y-4 md:col-span-2 border-t border-slate-100 pt-8 mt-4 text-right">
+            <label class="text-lg font-black block">حسابات التواصل الاجتماعي</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <label class="text-[10px] font-bold text-slate-400 block pr-1">رابط Facebook</label>
+                <input [(ngModel)]="newBusiness.facebook" class="w-full bg-slate-50 border-slate-200 rounded-xl p-3 text-right text-xs" placeholder="facebook.com/...">
+              </div>
+              <div class="space-y-1">
+                <label class="text-[10px] font-bold text-slate-400 block pr-1">رابط Instagram</label>
+                <input [(ngModel)]="newBusiness.instagram" class="w-full bg-slate-50 border-slate-200 rounded-xl p-3 text-right text-xs" placeholder="instagram.com/...">
+              </div>
+              <div class="space-y-1">
+                <label class="text-[10px] font-bold text-slate-400 block pr-1">رابط LinkedIn</label>
+                <input [(ngModel)]="newBusiness.linkedin" class="w-full bg-slate-50 border-slate-200 rounded-xl p-3 text-right text-xs" placeholder="linkedin.com/in/...">
+              </div>
+              <div class="space-y-1">
+                <label class="text-[10px] font-bold text-slate-400 block pr-1">رابط TikTok</label>
+                <input [(ngModel)]="newBusiness.tiktok" class="w-full bg-slate-50 border-slate-200 rounded-xl p-3 text-right text-xs" placeholder="tiktok.com/@...">
+              </div>
+              <div class="space-y-1 sm:col-span-2">
+                <label class="text-[10px] font-bold text-slate-400 block pr-1">رابط Twitter / X</label>
+                <input [(ngModel)]="newBusiness.twitter" class="w-full bg-slate-50 border-slate-200 rounded-xl p-3 text-right text-xs" placeholder="x.com/...">
+              </div>
+            </div>
+          </div>
+
           <!-- Gallery Links -->
           <div class="space-y-4 md:col-span-2 border-t border-slate-100 pt-8 mt-4 text-right">
             <label class="text-lg font-black block">معرض الصور (Gallery)</label>

@@ -48,7 +48,12 @@ export class DashboardComponent implements OnInit {
     gallery: [],
     verified: false,
     rating: 5,
-    reviewCount: 0
+    reviewCount: 0,
+    facebook: '',
+    instagram: '',
+    linkedin: '',
+    twitter: '',
+    tiktok: ''
   };
 
   newCategoryName = '';
@@ -145,7 +150,12 @@ export class DashboardComponent implements OnInit {
       gallery: [],
       verified: false,
       rating: 5,
-      reviewCount: 0
+      reviewCount: 0,
+      facebook: '',
+      instagram: '',
+      linkedin: '',
+      twitter: '',
+      tiktok: ''
     };
     this.showAddBusinessModal = true;
   }

@@ -27,6 +27,11 @@ export interface Business {
   imageUrl: string;
   gallery: string[];
   ownerId: string;
+  facebook?: string;
+  instagram?: string;
+  linkedin?: string;
+  twitter?: string;
+  tiktok?: string;
 }
 
 @Injectable({
