@@ -48,38 +48,46 @@
           </div>
           <button (click)="openAddBusinessModal()" class="bg-primary text-white px-4 md:px-8 py-2 md:py-3 rounded-xl md:rounded-2xl font-bold text-xs md:text-sm shadow-lg shadow-primary/20">إضافة شركة</button>
         </header>
-+
-+        <!-- Mobile Quick Actions -->
-+        <div class="lg:hidden flex overflow-x-auto gap-3 px-6 py-4 bg-white border-b border-slate-100 sticky top-20 z-20 flex-row-reverse no-scrollbar">
-+          <a class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-sky-50 text-primary font-bold rounded-xl text-[13px] whitespace-nowrap flex-row-reverse" href="#">
-+            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1">grid_view</span>
-+            لوحة التحكم
-+          </a>
-+          <button (click)="openAddBusinessModal()" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-on-surface-variant font-bold rounded-xl text-[13px] whitespace-nowrap flex-row-reverse">
-+            <span class="material-symbols-outlined text-lg">add_circle</span>
-+             إضافة شركة جديدة
-+          </button>
-+          <button (click)="showCategoryModal = true" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-on-surface-variant font-bold rounded-xl text-[13px] whitespace-nowrap flex-row-reverse">
-+            <span class="material-symbols-outlined text-lg">category</span>
-+             إدارة القطاعات
-+          </button>
-+        </div>
 
-        <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-10 space-y-10">
-          <section class="bg-white p-6 md:p-10 rounded-[2rem] shadow-sm border border-slate-100 text-right">
-            <h2 class="text-xl md:text-2xl font-extrabold font-headline text-on-surface mb-10">الشركات المسجلة</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Mobile Quick Actions -->
+        <div class="lg:hidden flex overflow-x-auto gap-3 px-4 py-4 bg-white border-b border-slate-100 sticky top-20 z-20 flex-row-reverse no-scrollbar shadow-sm">
+          <a class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-sky-50 text-primary font-bold rounded-xl text-[13px] whitespace-nowrap flex-row-reverse" href="#">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1">grid_view</span>
+            لوحة التحكم
+          </a>
+          <button (click)="openAddBusinessModal()" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-on-surface-variant font-bold rounded-xl text-[13px] whitespace-nowrap flex-row-reverse">
+            <span class="material-symbols-outlined text-lg">add_circle</span>
+            إضافة شركة جديدة
+          </button>
+          <button (click)="showCategoryModal = true" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-on-surface-variant font-bold rounded-xl text-[13px] whitespace-nowrap flex-row-reverse">
+            <span class="material-symbols-outlined text-lg">category</span>
+            إدارة القطاعات
+          </button>
+        </div>
+
+        <div class="max-w-[1400px] mx-auto px-4 md:px-10 py-6 md:py-10 space-y-8">
+          <section class="bg-white p-5 md:p-10 rounded-3xl md:rounded-[2rem] shadow-sm border border-slate-50 text-right">
+            <div class="flex justify-between items-center mb-8 flex-row-reverse">
+               <h2 class="text-xl md:text-2xl font-black font-headline text-on-surface">الشركات المسجلة</h2>
+               <span class="text-xs bg-slate-50 text-slate-500 px-3 py-1 rounded-full border border-slate-100 md:hidden">إجمالي: {{ (userBusinesses$ | async)?.length }}</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               @for (business of userBusinesses$ | async; track business.id) {
-                <div class="border border-slate-100 rounded-2xl p-4 flex flex-col gap-4 group">
-                  <div class="relative h-40 overflow-hidden rounded-xl">
-                    <img [src]="business.imageUrl || 'https://via.placeholder.com/300x200'" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Business Image">
+                <div class="bg-white border border-slate-100 rounded-3xl p-3 md:p-5 flex flex-col gap-4 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300">
+                  <div class="relative aspect-video md:h-40 overflow-hidden rounded-2xl bg-slate-50">
+                    <img [src]="business.imageUrl || 'https://via.placeholder.com/300x200'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Business Image">
+                    <div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-[10px] font-bold text-primary border border-white/50">{{ business.category }}</div>
                   </div>
-                  <h3 class="font-bold text-lg text-right">{{ business.name }}</h3>
-                  <div class="flex justify-between items-center flex-row-reverse">
-                    <span class="text-sm text-slate-500">{{ business.category }}</span>
-                    <div class="flex gap-2">
-                      <button (click)="editBusiness(business)" class="p-2 text-primary hover:bg-sky-50 rounded-lg"><span class="material-symbols-outlined">edit</span></button>
-                      <button (click)="deleteBusiness(business.id)" class="p-2 text-red-600 hover:bg-red-50 rounded-lg"><span class="material-symbols-outlined">delete</span></button>
+                  
+                  <div class="space-y-2">
+                    <h3 class="font-bold text-lg text-right truncate text-on-surface">{{ business.name }}</h3>
+                    <div class="flex justify-between items-center flex-row-reverse pt-2 border-t border-slate-50">
+                      <div class="flex gap-1.5">
+                        <button (click)="editBusiness(business)" class="w-9 h-9 flex items-center justify-center text-primary hover:bg-sky-50 rounded-xl transition-colors border border-sky-50"><span class="material-symbols-outlined text-lg">edit</span></button>
+                        <button (click)="deleteBusiness(business.id)" class="w-9 h-9 flex items-center justify-center text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-red-50"><span class="material-symbols-outlined text-lg">delete</span></button>
+                      </div>
+                      <span class="text-[11px] text-slate-400 font-medium">آخر تحديث: مؤخراً</span>
                     </div>
                   </div>
                 </div>
