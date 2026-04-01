@@ -125,7 +125,7 @@
             <div class="space-y-1 flex-1">
               <span class="text-[10px] text-slate-400 font-black uppercase tracking-widest block">الموقع
                 الإلكتروني</span>
-              <p class="text-sm font-bold"><a [href]="business.website" target="_blank"
+              <p class="text-sm font-bold"><a [href]="formatUrl(business.website)" target="_blank"
                   class="text-primary hover:underline">{{ business.website }}</a></p>
             </div>
           </div>
@@ -139,7 +139,7 @@
             التواصل الاجتماعي</span>
           <div class="flex flex-wrap gap-3 justify-end">
             @if (business.facebook) {
-            <a [href]="business.facebook" target="_blank"
+            <a [href]="formatUrl(business.facebook)" target="_blank"
               class="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-slate-200 text-[#1877F2] hover:bg-slate-50 transition-colors shadow-sm">
               <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path
@@ -148,7 +148,7 @@
             </a>
             }
             @if (business.instagram) {
-            <a [href]="business.instagram" target="_blank"
+            <a [href]="formatUrl(business.instagram)" target="_blank"
               class="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-slate-200 text-[#E4405F] hover:bg-slate-50 transition-colors shadow-sm">
               <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path
@@ -157,7 +157,7 @@
             </a>
             }
             @if (business.linkedin) {
-            <a [href]="business.linkedin" target="_blank"
+            <a [href]="formatUrl(business.linkedin)" target="_blank"
               class="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-slate-200 text-[#0077B5] hover:bg-slate-50 transition-colors shadow-sm">
               <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path
@@ -166,7 +166,7 @@
             </a>
             }
             @if (business.tiktok) {
-            <a [href]="business.tiktok" target="_blank"
+            <a [href]="formatUrl(business.tiktok)" target="_blank"
               class="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-slate-200 text-black hover:bg-slate-50 transition-colors shadow-sm">
               <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path
@@ -175,7 +175,7 @@
             </a>
             }
             @if (business.twitter) {
-            <a [href]="business.twitter" target="_blank"
+            <a [href]="formatUrl(business.twitter)" target="_blank"
               class="w-10 h-10 rounded-xl bg-white flex items-center justify-center border border-slate-200 text-black hover:bg-slate-50 transition-colors shadow-sm">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path
