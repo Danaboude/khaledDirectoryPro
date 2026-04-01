@@ -1,53 +1,47 @@
 @if (business$ | async; as business) {
 <main class="pt-20">
-  <!-- Editorial Hero Section -->
-  <section class="relative min-h-[550px] w-full flex items-center overflow-hidden text-right">
-    <div class="absolute inset-0 z-0">
-      <img alt="Company Banner" class="w-full h-full object-cover"
-        [src]="business.imageUrl || 'https://via.placeholder.com/1200x600'" />
-      <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-black/90 via-black/50 to-transparent"></div>
-    </div>
-    <div class="relative z-10 w-full max-w-screen-2xl mx-auto px-8 py-16 md:py-24">
-      <div class="flex flex-col md:flex-row-reverse items-center md:items-end gap-10">
+  <!-- Modern Business Hero Section -->
+  <section class="max-w-screen-2xl mx-auto px-6 pt-12 md:pt-20">
+    <div
+      class="flex flex-col-reverse md:flex-row gap-10 md:gap-16 items-center bg-white rounded-[40px] p-8 md:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.04)] border border-slate-50">
 
-        <!-- Text Content -->
-        <div class="flex-1 w-full text-right space-y-6">
-          <div class="flex flex-wrap items-center justify-start md:justify-start gap-4 flex-row-reverse">
-            <span
-              class="bg-primary/20 backdrop-blur-md text-white text-[10px] md:text-xs font-black tracking-widest px-4 py-1.5 rounded-full border border-primary/30 uppercase">
-              {{ business.category }}
-            </span>
-            @if (business.verified) {
-            <div
-              class="flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-              <img src="/jci.png" class="h-10 md:h-14 w-auto object-contain" alt="Verified">
-              <span class="text-white text-[10px] md:text-sm font-black tracking-widest uppercase truncate max-w-[150px]">شركة موثقة</span>
-            </div>
-            }
+      <!-- Business Branding & Actions -->
+      <div class="flex-1 w-full text-right space-y-8">
+        <div class="flex items-center justify-end gap-5">
+          @if (business.verified) {
+          <div class="hover:scale-105 transition-transform duration-300">
+            <img src="/jci.png" class="h-16 md:h-24 w-auto object-contain" alt="Verified Logo">
           </div>
+          }
+          <span
+            class="bg-primary/5 text-primary text-[10px] md:text-xs font-black tracking-widest px-5 py-2.5 rounded-full border border-primary/10 uppercase">
+            {{ business.category }}
+          </span>
+        </div>
 
-          <h1 class="text-4xl md:text-7xl font-black text-white font-headline leading-tight tracking-tight drop-shadow-2xl">
+        <div class="space-y-4">
+          <h1 class="text-4xl md:text-7xl font-black text-slate-900 font-headline leading-[1.1] tracking-tight">
             {{ business.name }}
           </h1>
-
-          <div class="flex flex-wrap items-center justify-start md:justify-start gap-6 text-white/90 flex-row-reverse">
-            <div class="flex items-center gap-2 text-sm md:text-base font-bold bg-black/20 backdrop-blur-sm px-4 py-2 rounded-xl">
-              <span class="truncate max-w-[250px]">{{ business.address }}</span>
-              <span class="material-symbols-outlined !text-xl text-primary-fixed">location_on</span>
-            </div>
-          </div>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+        <div class="flex justify-end pt-6">
           <button (click)="share(business.name)"
-            class="group w-full md:w-auto justify-center bg-white text-on-surface px-8 py-4 rounded-2xl font-black flex items-center gap-3 hover:bg-primary hover:text-white transition-all active:scale-95 cursor-pointer shadow-2xl">
-            <span class="material-symbols-outlined transition-transform group-hover:rotate-12">share</span>
-            <span>مشاركة</span>
+            class="w-full md:w-auto justify-center bg-slate-900 text-white px-10 py-4.5 rounded-2xl font-black flex items-center gap-3 hover:bg-primary transition-all active:scale-95 shadow-xl shadow-slate-200 cursor-pointer">
+            <span class="material-symbols-outlined">share</span>
+            <span>مشاركة هذه الصفحة</span>
           </button>
         </div>
-
       </div>
+
+      <!-- Business Featured Image -->
+      <div class="w-full md:w-[480px] aspect-square rounded-[3rem] overflow-hidden shadow-2xl relative group">
+        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+        <img [src]="business.imageUrl || 'https://via.placeholder.com/800x800'"
+          class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+          alt="{{ business.name }} Primary Image">
+      </div>
+
     </div>
   </section>
 
@@ -59,10 +53,9 @@
       <div class="space-y-8">
         <div class="flex items-center gap-4 group justify-start w-full">
           <h2 class="text-3xl font-black font-headline tracking-tight">نبذة عن الشركة</h2>
-          <span class="w-12 h-1 bg-primary rounded-full group-hover:w-16 transition-all duration-500"></span>
         </div>
-        <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100">
-          <p class="text-on-surface-variant leading-relaxed text-xl font-body">
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-slate-50">
+          <p class="text-on-surface-variant leading-relaxed text-lg font-body">
             {{ business.description }}
           </p>
         </div>
@@ -73,8 +66,7 @@
       <div class="space-y-8">
         <div class="flex justify-start items-center">
           <div class="flex items-center gap-4 group">
-            <h2 class="text-3xl font-black font-headline tracking-tight">معرض الصور</h2>
-            <span class="w-12 h-1 bg-primary rounded-full group-hover:w-16 transition-all duration-500"></span>
+            <h2 class="text-3xl font-black font-headline tracking-tight">المؤسس </h2>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-6 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
