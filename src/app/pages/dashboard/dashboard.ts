@@ -54,6 +54,7 @@ export class DashboardComponent implements OnInit {
     linkedin: '',
     twitter: '',
     tiktok: '',
+    whatsapp: '',
     founderName: ''
   };
 
@@ -157,6 +158,7 @@ export class DashboardComponent implements OnInit {
       linkedin: '',
       twitter: '',
       tiktok: '',
+      whatsapp: '',
       founderName: ''
     };
     this.showAddBusinessModal = true;

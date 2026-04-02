@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BusinessService, Business } from '../../services/business';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { PLATFORM_ID } from '@angular/core';
@@ -9,7 +9,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-business-detail',
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, CommonModule],
   templateUrl: './business-detail.html',
   styleUrl: './business-detail.css'
 })
@@ -58,6 +58,11 @@ export class BusinessDetailComponent implements OnInit {
     if (!url) return '#';
     if (url.startsWith('http://') || url.startsWith('https://')) {
       return url;
+    }
+    // Handle WhatsApp numbers
+    if (/^\+?[0-9\s\-]+$/.test(url)) {
+      const cleaned = url.replace(/\D/g, '');
+      return `https://wa.me/${cleaned}`;
     }
     return `https://${url}`;
   }
