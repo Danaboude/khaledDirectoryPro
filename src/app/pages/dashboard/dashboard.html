@@ -114,6 +114,10 @@
             <input [(ngModel)]="newBusiness.name" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="أدخل اسم الشركة">
           </div>
           <div class="space-y-2 text-right">
+            <label class="text-sm font-bold text-slate-500 pr-1">اسم المؤسس</label>
+            <input [(ngModel)]="newBusiness.founderName" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all" placeholder="أدخل اسم المؤسس">
+          </div>
+          <div class="space-y-2 text-right">
             <label class="text-sm font-bold text-slate-500 pr-1">القطاع</label>
             <select [(ngModel)]="newBusiness.category" class="w-full bg-slate-50 border-slate-200 rounded-2xl p-4 text-right focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition-all">
               <option value="">اختر القطاع</option>

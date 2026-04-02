@@ -32,6 +32,7 @@ export interface Business {
   linkedin?: string;
   twitter?: string;
   tiktok?: string;
+  founderName?: string;
 }
 
 @Injectable({

@@ -53,7 +53,8 @@ export class DashboardComponent implements OnInit {
     instagram: '',
     linkedin: '',
     twitter: '',
-    tiktok: ''
+    tiktok: '',
+    founderName: ''
   };
 
   newCategoryName = '';
@@ -155,7 +156,8 @@ export class DashboardComponent implements OnInit {
       instagram: '',
       linkedin: '',
       twitter: '',
-      tiktok: ''
+      tiktok: '',
+      founderName: ''
     };
     this.showAddBusinessModal = true;
   }
