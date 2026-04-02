@@ -20,24 +20,49 @@ export class HomeComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
   
-  public featuredBusinesses$!: Observable<Business[]>;
+  public paginatedBusinesses: Business[] = [];
   public categories$!: Observable<Category[]>;
+  public currentPage = 1;
+  public pageSize = 3;
+  public totalPages = 0;
+  private allBusinesses: Business[] = [];
 
   ngOnInit() {
     if (!isPlatformBrowser(this.platformId)) {
-      this.featuredBusinesses$ = of([]);
       this.categories$ = of([]);
       return;
     }
 
     this.categories$ = this.categoryService.getCategories();
 
-    this.featuredBusinesses$ = this.businessService.getBusinesses().pipe(
-      map(businesses => businesses.slice(0, 3))
-    );
+    this.businessService.getBusinesses().subscribe(businesses => {
+      this.allBusinesses = businesses;
+      this.totalPages = Math.ceil(this.allBusinesses.length / this.pageSize);
+      this.updatePaginated();
+    });
+  }
+
+  updatePaginated() {
+    const start = (this.currentPage - 1) * this.pageSize;
+    this.paginatedBusinesses = this.allBusinesses.slice(start, start + this.pageSize);
+  }
+
+  setPage(page: number) {
+    this.currentPage = page;
+    this.updatePaginated();
+    // Scroll to section for better UX
+    const section = document.getElementById('businesses-section');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  getPages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   performSearch(query: string, category: string) {
     this.router.navigate(['/search'], { queryParams: { q: query, cat: category } });
   }
 }
+
